@@ -189,6 +189,11 @@ class BizaoGateway extends AbstractGateway
      */
     protected function checkHealth(): bool
     {
+        // En mode test/sandbox, on considère que le gateway est toujours disponible
+        if ($this->isTestMode()) {
+            return true;
+        }
+
         try {
             $response = $this->makeRequest('GET', $this->getBaseUrl() . '/v1/health', [
                 'timeout' => 5,
