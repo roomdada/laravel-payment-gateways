@@ -40,6 +40,12 @@ class PaymentManagerServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
 
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                \PaymentManager\Console\Commands\DiagnosePaymentGateways::class,
+            ]);
+        }
+
         $this->registerRoutes();
     }
 

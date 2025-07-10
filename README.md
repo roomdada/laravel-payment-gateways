@@ -446,7 +446,53 @@ Le package enregistre automatiquement toutes les opérations de paiement. Vous p
 
 Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 
-## 🆘 Support
+## 🆘 Support et Dépannage
+
+### Diagnostic Automatique
+
+Le package inclut une commande de diagnostic pour identifier les problèmes :
+
+```bash
+php artisan payment:diagnose
+```
+
+Cette commande vérifie :
+- ✅ Configuration du package
+- ✅ Variables d'environnement
+- ✅ Initialisation des gateways
+- ✅ Connectivité des APIs
+
+### Problèmes Courants
+
+#### "No payment gateways available"
+
+Cette erreur indique qu'aucune passerelle n'est disponible. Vérifiez :
+
+1. **Configuration publiée** :
+```bash
+php artisan vendor:publish --tag=laravel-payment-gateways-config
+```
+
+2. **Variables d'environnement** :
+```env
+CINETPAY_ENABLED=true
+CINETPAY_API_KEY=your_api_key
+CINETPAY_SITE_ID=your_site_id
+CINETPAY_ENVIRONMENT=TEST
+```
+
+3. **Mode test activé** pour le développement :
+```env
+CINETPAY_ENVIRONMENT=TEST
+BIZAO_ENVIRONMENT=sandbox
+WINIPAYER_ENVIRONMENT=test
+```
+
+#### Plus de détails
+
+Consultez le guide complet de dépannage : [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+
+### Support
 
 Pour toute question ou problème :
 
