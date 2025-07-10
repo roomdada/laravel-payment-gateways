@@ -1,4 +1,4 @@
-# Payment Manager Package
+# Laravel Payment Gateways
 
 Un package Laravel réutilisable pour gérer plusieurs agrégateurs de paiement (Cinetpay, Bizao, Winipayer) de manière modulaire, configurable et hautement flexible.
 
@@ -23,13 +23,13 @@ Un package Laravel réutilisable pour gérer plusieurs agrégateurs de paiement 
 1. **Installer le package via Composer :**
 
 ```bash
-composer require payment-manager/package
+composer require room/laravel-payment-gateways
 ```
 
 2. **Publier la configuration :**
 
 ```bash
-php artisan vendor:publish --tag=payment-manager-config
+php artisan vendor:publish --tag=laravel-payment-gateways-config
 ```
 
 3. **Exécuter les migrations :**
@@ -94,7 +94,7 @@ PAYMENT_LOG_LEVEL=info
 
 ### Configuration avancée
 
-Vous pouvez également configurer les gateways via le fichier `config/payment-manager.php` :
+Vous pouvez également configurer les gateways via le fichier `config/laravel-payment-gateways.php` :
 
 ```php
 return [

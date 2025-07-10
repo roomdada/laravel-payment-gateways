@@ -1,6 +1,6 @@
 # Guide de Contribution
 
-Merci de votre intérêt pour contribuer au Payment Manager Package ! Ce document vous guidera à travers le processus de contribution.
+Merci de votre intérêt pour contribuer au Laravel Payment Gateways Package ! Ce document vous guidera à travers le processus de contribution.
 
 ## 🚀 Comment Contribuer
 
@@ -9,8 +9,8 @@ Merci de votre intérêt pour contribuer au Payment Manager Package ! Ce documen
 1. Fork ce repository sur GitHub
 2. Clone votre fork localement :
    ```bash
-   git clone https://github.com/votre-username/payment-manager-package.git
-   cd payment-manager-package
+   git clone https://github.com/votre-username/laravel-payment-gateways.git
+cd laravel-payment-gateways
    ```
 
 ### 2. Installation

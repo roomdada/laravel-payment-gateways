@@ -1,5 +1,5 @@
 {
-    "name": "payment-manager/package",
+    "name": "room/laravel-payment-gateways",
     "description": "A Laravel package for managing multiple payment gateways (Cinetpay, Bizao, Winipayer) with automatic failover and dynamic configuration",
     "type": "library",
     "license": "MIT",

@@ -16,15 +16,15 @@ class PaymentManagerServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../../config/payment-manager.php', 'payment-manager'
+            __DIR__ . '/../../config/laravel-payment-gateways.php', 'laravel-payment-gateways'
         );
 
         $this->app->singleton(PaymentManagerInterface::class, function ($app) {
-            $config = $app['config']->get('payment-manager', []);
+            $config = $app['config']->get('laravel-payment-gateways', []);
             return new PaymentManager($config);
         });
 
-        $this->app->alias(PaymentManagerInterface::class, 'payment-manager');
+        $this->app->alias(PaymentManagerInterface::class, 'laravel-payment-gateways');
     }
 
     /**
@@ -35,8 +35,8 @@ class PaymentManagerServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->publishes([
-            __DIR__ . '/../../config/payment-manager.php' => config_path('payment-manager.php'),
-        ], 'payment-manager-config');
+            __DIR__ . '/../../config/laravel-payment-gateways.php' => config_path('laravel-payment-gateways.php'),
+        ], 'laravel-payment-gateways-config');
 
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
 
@@ -51,7 +51,7 @@ class PaymentManagerServiceProvider extends ServiceProvider
     protected function registerRoutes(): void
     {
         if (!$this->app->routesAreCached()) {
-            $config = $this->app['config']->get('payment-manager.webhooks', []);
+            $config = $this->app['config']->get('laravel-payment-gateways.webhooks', []);
 
             if ($config['enabled'] ?? true) {
                 $router = $this->app['router'];

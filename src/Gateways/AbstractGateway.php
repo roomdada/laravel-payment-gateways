@@ -101,7 +101,7 @@ abstract class AbstractGateway implements PaymentGatewayInterface
      */
     protected function logOperation(string $operation, array $data, array $response = []): void
     {
-        if (!config('payment-manager.logging.enabled', true)) {
+        if (!config('laravel-payment-gateways.logging.enabled', true)) {
             return;
         }
 
@@ -113,8 +113,8 @@ abstract class AbstractGateway implements PaymentGatewayInterface
             'timestamp' => now()->toISOString(),
         ];
 
-        $channel = config('payment-manager.logging.channel', 'payment');
-        $level = config('payment-manager.logging.level', 'info');
+        $channel = config('laravel-payment-gateways.logging.channel', 'payment');
+        $level = config('laravel-payment-gateways.logging.level', 'info');
 
         logger()->channel($channel)->log($level, 'Payment operation', $logData);
     }
