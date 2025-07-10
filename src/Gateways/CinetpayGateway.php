@@ -155,7 +155,6 @@ class CinetpayGateway extends AbstractGateway
     {
         $this->logOperation('process_webhook', $webhookData);
 
-        // Verify webhook signature
         if (!$this->verifyWebhookSignature($webhookData)) {
             return PaymentResponse::failure($this->name, 'Invalid webhook signature');
         }
@@ -182,6 +181,11 @@ class CinetpayGateway extends AbstractGateway
      */
     protected function checkHealth(): bool
     {
+        // En mode test, on considère que le gateway est toujours disponible
+        if ($this->isTestMode()) {
+            return true;
+        }
+
         try {
             $response = $this->makeRequest('GET', $this->getBaseUrl() . '/health', [
                 'timeout' => 5,
