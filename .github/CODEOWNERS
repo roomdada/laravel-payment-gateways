@@ -1,0 +1,46 @@
+# Code Owners pour Laravel Payment Gateways Package
+# Ce fichier définit qui doit reviewer les changements dans le repository
+
+# Propriétaire principal du package
+* @roomdada
+
+# Configuration et documentation
+/config/ @roomdada
+/README.md @roomdada
+/TROUBLESHOOTING.md @roomdada
+/CHANGELOG.md @roomdada
+/LICENSE @roomdada
+
+# Code source principal
+/src/ @roomdada
+/examples/ @roomdada
+
+# Tests
+/tests/ @roomdada
+/phpunit.xml @roomdada
+
+# Configuration du package
+/composer.json @roomdada
+/composer.lock @roomdada
+
+# Migrations de base de données
+/database/ @roomdada
+
+# GitHub Actions et workflows
+/.github/ @roomdada
+
+# Documentation et guides
+/docs/ @roomdada
+
+# Scripts et outils
+/scripts/ @roomdada
+
+# Fichiers de configuration
+/.gitignore @roomdada
+/.editorconfig @roomdada
+/.php-cs-fixer.php @roomdada
+/.phpstan.neon @roomdada
+
+# Fichiers de release
+/RELEASE.md @roomdada
+/CONTRIBUTING.md @roomdada

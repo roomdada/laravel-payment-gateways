@@ -1,171 +1,242 @@
-# Guide de Contribution
+# Guide de Contribution - Laravel Payment Gateways
 
-Merci de votre intérêt pour contribuer au Laravel Payment Gateways Package ! Ce document vous guidera à travers le processus de contribution.
+Merci de votre intérêt pour contribuer au package Laravel Payment Gateways ! Ce document décrit le processus de contribution et les règles à suivre.
 
-## 🚀 Comment Contribuer
+## 🎯 Avant de Commencer
+
+### Prérequis
+- PHP 8.1+
+- Composer
+- Git
+- Compréhension de Laravel et des packages
+
+### Communication
+- **Issues** : Pour les bugs, suggestions d'amélioration, questions
+- **Discussions** : Pour les discussions générales et l'aide
+- **Pull Requests** : Pour les contributions de code
+
+## 🔄 Processus de Contribution
 
 ### 1. Fork et Clone
-
-1. Fork ce repository sur GitHub
-2. Clone votre fork localement :
-   ```bash
-   git clone https://github.com/votre-username/laravel-payment-gateways.git
+```bash
+# Fork le repository sur GitHub
+# Puis clonez votre fork
+git clone https://github.com/votre-username/laravel-payment-gateways.git
 cd laravel-payment-gateways
-   ```
 
-### 2. Installation
+# Ajoutez le repository original comme upstream
+git remote add upstream https://github.com/roomdada/laravel-payment-gateways.git
+```
 
+### 2. Installation des Dépendances
 ```bash
 composer install
 ```
 
-### 3. Tests
-
-Assurez-vous que tous les tests passent :
-
+### 3. Branches de Développement
 ```bash
-./vendor/bin/phpunit
+# Créez une branche pour votre fonctionnalité
+git checkout -b feature/nom-de-la-fonctionnalite
+
+# Ou pour un bug fix
+git checkout -b fix/nom-du-bug
 ```
 
 ### 4. Développement
+- Suivez les standards de code PHP (PSR-12)
+- Ajoutez des tests pour les nouvelles fonctionnalités
+- Mettez à jour la documentation si nécessaire
+- Respectez l'architecture existante
 
-1. Créez une branche pour votre fonctionnalité :
-   ```bash
-   git checkout -b feature/nouvelle-fonctionnalite
-   ```
-
-2. Développez votre fonctionnalité en suivant les standards de code
-
-3. Ajoutez des tests pour votre code
-
-4. Vérifiez que les tests passent :
-   ```bash
-   ./vendor/bin/phpunit
-   ```
-
-### 5. Commit et Push
-
+### 5. Tests
 ```bash
-git add .
-git commit -m "feat: ajouter nouvelle fonctionnalité"
-git push origin feature/nouvelle-fonctionnalite
+# Exécutez les tests
+./vendor/bin/phpunit
+
+# Vérifiez la qualité du code
+./vendor/bin/phpstan analyse
+./vendor/bin/php-cs-fixer fix --dry-run
 ```
 
-### 6. Pull Request
+### 6. Commit et Push
+```bash
+# Commits conventionnels
+git commit -m "feat: ajouter support pour nouveau gateway"
+git commit -m "fix: corriger problème d'authentification Bizao"
+git commit -m "docs: mettre à jour la documentation"
 
-1. Allez sur GitHub et créez une Pull Request
-2. Décrivez clairement votre contribution
-3. Attendez la review
+# Push vers votre fork
+git push origin feature/nom-de-la-fonctionnalite
+```
+
+### 7. Pull Request
+- Créez une Pull Request vers la branche `main`
+- Utilisez le template de PR fourni
+- Décrivez clairement les changements
+- Mentionnez les issues liées
 
 ## 📋 Standards de Code
 
 ### PHP
+- **PSR-12** : Standards de codage PHP
+- **Type hints** : Utilisez les types PHP 8.1+
+- **DocBlocks** : Documentation des méthodes publiques
+- **Namespaces** : Respectez la structure des namespaces
 
-- Suivez les standards PSR-12
-- Utilisez des noms de variables et méthodes descriptifs
-- Ajoutez des commentaires PHPDoc pour les méthodes publiques
-- Gardez les méthodes courtes et focalisées
+### Laravel
+- **Service Providers** : Suivez les conventions Laravel
+- **Configurations** : Utilisez les fichiers de config
+- **Migrations** : Nommage conventionnel
+- **Tests** : Tests unitaires et d'intégration
 
-### Tests
+### Architecture
+- **Interfaces** : Définissez des contrats clairs
+- **Abstraction** : Utilisez l'abstraction appropriée
+- **SOLID** : Respectez les principes SOLID
+- **Flexibilité** : Privilégiez la configuration
 
-- Écrivez des tests pour toutes les nouvelles fonctionnalités
-- Utilisez des noms de tests descriptifs
-- Testez les cas d'erreur et les cas limites
-- Maintenez une couverture de code élevée
+## 🧪 Tests
 
-### Documentation
+### Types de Tests
+- **Tests Unitaires** : Testez les classes individuellement
+- **Tests d'Intégration** : Testez l'interaction entre composants
+- **Tests de Fonctionnalité** : Testez les cas d'usage complets
 
-- Mettez à jour la documentation si nécessaire
-- Ajoutez des exemples d'utilisation
-- Documentez les nouvelles fonctionnalités
+### Exécution des Tests
+```bash
+# Tous les tests
+./vendor/bin/phpunit
 
-## 🏗️ Architecture
+# Tests unitaires uniquement
+./vendor/bin/phpunit --testsuite=Unit
 
-### Ajouter un Nouveau Gateway
+# Tests d'intégration uniquement
+./vendor/bin/phpunit --testsuite=Feature
 
-1. Créez une nouvelle classe qui étend `AbstractGateway`
-2. Implémentez toutes les méthodes requises
-3. Ajoutez des tests unitaires
-4. Mettez à jour la documentation
+# Avec couverture de code
+./vendor/bin/phpunit --coverage-html coverage/
+```
 
-Exemple :
-
+### Ajouter des Tests
 ```php
 <?php
 
-namespace PaymentManager\Gateways;
+namespace PaymentManager\Tests\Unit;
 
-use PaymentManager\Contracts\PaymentException;
-use PaymentManager\Contracts\PaymentResponseInterface;
-use PaymentManager\Responses\PaymentResponse;
+use PaymentManager\Managers\PaymentManager;
+use PHPUnit\Framework\TestCase;
 
-class MonNouveauGateway extends AbstractGateway
+class PaymentManagerTest extends TestCase
 {
-    protected function validateConfig(): void
+    public function test_initialize_payment_with_valid_data()
     {
-        // Validation de la configuration
-    }
-
-    public function initializePayment(array $paymentData): PaymentResponseInterface
-    {
-        // Logique d'initialisation
-    }
-
-    public function verifyPayment(string $transactionId): PaymentResponseInterface
-    {
-        // Logique de vérification
-    }
-
-    public function processWebhook(array $webhookData): PaymentResponseInterface
-    {
-        // Traitement webhook
-    }
-
-    protected function checkHealth(): bool
-    {
-        // Vérification de santé
+        // Votre test ici
     }
 }
 ```
 
-## 🐛 Signaler un Bug
+## 📝 Documentation
 
-1. Vérifiez que le bug n'a pas déjà été signalé
-2. Créez une issue avec :
-   - Description claire du problème
-   - Étapes pour reproduire
-   - Comportement attendu vs actuel
-   - Version du package et de Laravel
-   - Logs d'erreur si applicable
+### Mise à Jour de la Documentation
+- **README.md** : Documentation principale
+- **TROUBLESHOOTING.md** : Guide de dépannage
+- **CHANGELOG.md** : Historique des changements
+- **Exemples** : Code d'exemple dans `/examples/`
 
-## 💡 Proposer une Fonctionnalité
+### Standards de Documentation
+- **Clarté** : Écrivez de manière claire et concise
+- **Exemples** : Incluez des exemples pratiques
+- **Mise à jour** : Gardez la documentation à jour
+- **Traduction** : Considérez les traductions si nécessaire
 
-1. Créez une issue pour discuter de la fonctionnalité
-2. Décrivez le cas d'usage
-3. Proposez une approche technique
-4. Attendez la validation avant de commencer le développement
+## 🔍 Review Process
 
-## 📝 Types de Contributions
+### Code Review
+- **Automatique** : Les PR sont automatiquement assignées aux code owners
+- **Obligatoire** : Au moins une approbation requise
+- **Standards** : Vérification des standards de code
+- **Tests** : Vérification que les tests passent
 
-### `feat:` - Nouvelles fonctionnalités
-### `fix:` - Corrections de bugs
-### `docs:` - Documentation
-### `style:` - Formatage du code
-### `refactor:` - Refactoring
-### `test:` - Tests
-### `chore:` - Maintenance
+### Critères d'Approval
+- ✅ Code fonctionnel et testé
+- ✅ Standards de code respectés
+- ✅ Documentation mise à jour
+- ✅ Tests ajoutés/modifiés
+- ✅ Pas de régression
 
-## 🤝 Code de Conduite
+## 🚀 Release Process
 
-- Soyez respectueux envers les autres contributeurs
-- Acceptez les critiques constructives
-- Aidez les nouveaux contributeurs
-- Restez focalisé sur l'amélioration du projet
+### Versioning
+- **Semantic Versioning** : MAJOR.MINOR.PATCH
+- **Breaking Changes** : Incrémentez MAJOR
+- **Nouvelles Fonctionnalités** : Incrémentez MINOR
+- **Bug Fixes** : Incrémentez PATCH
 
-## 📞 Besoin d'Aide ?
+### Release Notes
+- **CHANGELOG.md** : Mise à jour obligatoire
+- **GitHub Releases** : Notes de release détaillées
+- **Migration Guide** : Si breaking changes
 
-- Ouvrez une issue pour les questions
-- Consultez la documentation
-- Rejoignez notre communauté
+## 🐛 Reporting de Bugs
 
-Merci de contribuer ! 🎉
+### Template d'Issue
+```markdown
+## Description
+Description claire du problème
+
+## Étapes pour Reproduire
+1. Étape 1
+2. Étape 2
+3. Étape 3
+
+## Comportement Attendu
+Ce qui devrait se passer
+
+## Comportement Actuel
+Ce qui se passe actuellement
+
+## Environnement
+- PHP Version: 8.1+
+- Laravel Version: 9.0+
+- Package Version: 1.0.0
+- OS: Linux/macOS/Windows
+
+## Informations Supplémentaires
+Logs, captures d'écran, etc.
+```
+
+## 💡 Suggestions d'Amélioration
+
+### Template de Feature Request
+```markdown
+## Description
+Description de la fonctionnalité souhaitée
+
+## Cas d'Usage
+Comment cette fonctionnalité serait utilisée
+
+## Propositions d'Implémentation
+Idées sur l'implémentation (optionnel)
+
+## Alternatives Considérées
+Autres approches possibles (optionnel)
+```
+
+## 📞 Support
+
+### Questions et Aide
+- **GitHub Issues** : Pour les bugs et questions techniques
+- **GitHub Discussions** : Pour les discussions générales
+- **Documentation** : Consultez d'abord la documentation
+
+### Contact
+- **Maintainer** : @roomdada
+- **Email** : roomcodetraining@gmail.com
+
+## 🙏 Remerciements
+
+Merci à tous les contributeurs qui participent à l'amélioration de ce package !
+
+---
+
+**Note** : Ce guide peut être mis à jour. Vérifiez toujours la version la plus récente avant de contribuer.

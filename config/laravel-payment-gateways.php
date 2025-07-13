@@ -28,7 +28,6 @@ return [
             'priority' => 1,
             'api_key' => env('CINETPAY_API_KEY'),
             'site_id' => env('CINETPAY_SITE_ID'),
-            'environment' => env('CINETPAY_ENVIRONMENT', 'PROD'), // PROD or TEST
             'base_url' => env('CINETPAY_BASE_URL', 'https://api-checkout.cinetpay.com/v2'),
             'currency' => env('CINETPAY_CURRENCY', 'XOF'),
             'timeout' => env('CINETPAY_TIMEOUT', 30),
@@ -40,7 +39,6 @@ return [
             'priority' => 2,
             'client_id' => env('BIZAO_CLIENT_ID'),
             'client_secret' => env('BIZAO_CLIENT_SECRET'),
-            'environment' => env('BIZAO_ENVIRONMENT', 'production'), // production or sandbox
             'base_url' => env('BIZAO_BASE_URL', 'https://api.bizao.com'),
             'currency' => env('BIZAO_CURRENCY', 'XOF'),
             'timeout' => env('BIZAO_TIMEOUT', 30),
@@ -52,7 +50,6 @@ return [
             'priority' => 3,
             'merchant_id' => env('WINIPAYER_MERCHANT_ID'),
             'api_key' => env('WINIPAYER_API_KEY'),
-            'environment' => env('WINIPAYER_ENVIRONMENT', 'live'), // live or test
             'base_url' => env('WINIPAYER_BASE_URL', 'https://api.winipayer.com'),
             'currency' => env('WINIPAYER_CURRENCY', 'XOF'),
             'timeout' => env('WINIPAYER_TIMEOUT', 30),

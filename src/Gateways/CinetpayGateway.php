@@ -181,20 +181,9 @@ class CinetpayGateway extends AbstractGateway
      */
     protected function checkHealth(): bool
     {
-        // En mode test, on considère que le gateway est toujours disponible
-        if ($this->isTestMode()) {
-            return true;
-        }
-
-        try {
-            $response = $this->makeRequest('GET', $this->getBaseUrl() . '/health', [
-                'timeout' => 5,
-            ]);
-
-            return isset($response['status']) && $response['status'] === 'OK';
-        } catch (PaymentException $e) {
-            return false;
-        }
+        // L'utilisateur contrôle les endpoints via la configuration
+        // Pas de vérification automatique - laisser l'utilisateur gérer
+        return true;
     }
 
     /**

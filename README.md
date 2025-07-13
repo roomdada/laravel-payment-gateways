@@ -40,6 +40,28 @@ php artisan migrate
 
 ## ⚙️ Configuration
 
+### 🎯 Flexibilité des Endpoints
+
+Le package est conçu pour être **maximalement flexible** :
+
+- ✅ **Contrôle total des endpoints** : Vous définissez vos propres URLs d'API
+- ✅ **Pas de vérification automatique** : Le package ne fait pas de vérification de santé automatique
+- ✅ **Endpoints de production par défaut** : Utilise les URLs de production des agrégateurs
+- ✅ **Configuration simple** : Juste les credentials et l'URL de base
+
+**Exemple de configuration flexible :**
+```env
+# Production
+CINETPAY_BASE_URL=https://api-checkout.cinetpay.com/v2
+BIZAO_BASE_URL=https://api.bizao.com
+WINIPAYER_BASE_URL=https://api.winipayer.com
+
+# Ou vos propres endpoints
+CINETPAY_BASE_URL=https://votre-api-cinetpay.com
+BIZAO_BASE_URL=https://votre-api-bizao.com
+WINIPAYER_BASE_URL=https://votre-api-winipayer.com
+```
+
 ### Variables d'environnement
 
 Ajoutez ces variables à votre fichier `.env` :
@@ -52,7 +74,6 @@ PAYMENT_DEFAULT_GATEWAY=cinetpay
 CINETPAY_ENABLED=true
 CINETPAY_API_KEY=your_api_key
 CINETPAY_SITE_ID=your_site_id
-CINETPAY_ENVIRONMENT=PROD
 CINETPAY_BASE_URL=https://api-checkout.cinetpay.com/v2
 CINETPAY_CURRENCY=XOF
 CINETPAY_WEBHOOK_URL=https://your-domain.com/payment/webhook/cinetpay
@@ -61,7 +82,6 @@ CINETPAY_WEBHOOK_URL=https://your-domain.com/payment/webhook/cinetpay
 BIZAO_ENABLED=true
 BIZAO_CLIENT_ID=your_client_id
 BIZAO_CLIENT_SECRET=your_client_secret
-BIZAO_ENVIRONMENT=production
 BIZAO_BASE_URL=https://api.bizao.com
 BIZAO_CURRENCY=XOF
 BIZAO_WEBHOOK_URL=https://your-domain.com/payment/webhook/bizao
@@ -70,7 +90,6 @@ BIZAO_WEBHOOK_URL=https://your-domain.com/payment/webhook/bizao
 WINIPAYER_ENABLED=true
 WINIPAYER_MERCHANT_ID=your_merchant_id
 WINIPAYER_API_KEY=your_api_key
-WINIPAYER_ENVIRONMENT=live
 WINIPAYER_BASE_URL=https://api.winipayer.com
 WINIPAYER_CURRENCY=XOF
 WINIPAYER_WEBHOOK_URL=https://your-domain.com/payment/webhook/winipayer

@@ -156,15 +156,9 @@ abstract class AbstractGateway implements PaymentGatewayInterface
      */
     public function isAvailable(): bool
     {
-        if (!$this->enabled) {
-            return false;
-        }
-
-        try {
-            return $this->checkHealth();
-        } catch (PaymentException $e) {
-            return false;
-        }
+        // Un gateway est disponible s'il est activé et configuré
+        // L'utilisateur contrôle les endpoints via la configuration
+        return $this->enabled && !empty($this->config['base_url']);
     }
 
     /**
@@ -173,7 +167,12 @@ abstract class AbstractGateway implements PaymentGatewayInterface
      * @return bool
      * @throws PaymentException
      */
-    abstract protected function checkHealth(): bool;
+    protected function checkHealth(): bool
+    {
+        // Par défaut, considérer le gateway comme disponible
+        // L'utilisateur peut surcharger cette méthode si nécessaire
+        return true;
+    }
 
     /**
      * Get base URL for API requests
